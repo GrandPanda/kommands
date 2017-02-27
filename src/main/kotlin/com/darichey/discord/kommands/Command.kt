@@ -28,6 +28,11 @@ data class CommandContext(val client: IDiscordClient,
 
 class Command(
 		val onCalled: CommandFunction,
-		vararg val checkPerms: PermissionChecker = arrayOf(),
+		vararg val limiters: PermissionLimiter = arrayOf(),
 		val description: String = ""
+)
+
+class PermissionLimiter(
+		val check: PermissionChecker,
+		val onFail: CommandFunction = {}
 )

@@ -1,14 +1,29 @@
 package com.darichey.discord.kommands
 
 class CommandRegistry(val commands: MutableMap<String, Command> = mutableMapOf(),
-					  vararg val defaultPermChecks: PermissionChecker = arrayOf()) : MutableMap<String, Command> by commands {
+					  vararg val defaultLimiters: PermissionLimiter = arrayOf(),
+					  val onUnknown: CommandFunction = {}) : MutableMap<String, Command> by commands {
 
 	fun call(name: String, ctx: CommandContext) {
-		if (defaultPermChecks.all { it(ctx) }) {
-			val command = get(name)
-			command?.let {
-				if (it.checkPerms.all { it(ctx) }) it.onCalled(ctx)
+		val cmd: Command? = get(name)
+		if (cmd != null) {
+			defaultLimiters.forEach {
+				if (!it.check(ctx)) {
+					it.onFail(ctx)
+					return@call
+				}
 			}
+
+			cmd.limiters.forEach {
+				if (!it.check(ctx)) {
+					it.onFail(ctx)
+					return@call
+				}
+			}
+
+			cmd.onCalled(ctx)
+		} else {
+			onUnknown(ctx)
 		}
 	}
 }
