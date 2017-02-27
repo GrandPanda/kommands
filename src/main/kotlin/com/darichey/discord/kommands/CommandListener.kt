@@ -7,7 +7,7 @@ class CommandListener(val prefix: String, val registry: CommandRegistry) : IList
 	override fun handle(e: MessageReceivedEvent) {
 		if (e.message.content.startsWith(prefix)) {
 			val name = e.message.content.split(prefix, " ")[1]
-			registry.call(name, CommandContext(e))
+			registry.call(name, CommandContext(e, prefix))
 		}
 	}
 }

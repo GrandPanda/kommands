@@ -25,4 +25,5 @@ repositories {
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
     compileOnly "com.github.austinv11:Discord4j:2.7.0"
+    testCompileOnly "com.github.austinv11:Discord4j:2.7.0"
 }
