@@ -1,7 +1,7 @@
 package com.darichey.discord.kommands
 
 class CommandRegistry(val commands: MutableMap<String, Command> = mutableMapOf(),
-					  vararg val defaultLimiters: PermissionLimiter = arrayOf(),
+					  vararg val defaultLimiters: Limiter = arrayOf(),
 					  val onUnknown: CommandFunction = {}) : MutableMap<String, Command> by commands {
 
 	fun call(name: String, ctx: CommandContext) {

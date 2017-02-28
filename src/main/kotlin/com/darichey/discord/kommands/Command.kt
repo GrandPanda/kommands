@@ -31,11 +31,11 @@ data class CommandContext(val client: IDiscordClient,
 
 class Command(
 		val onCalled: CommandFunction,
-		vararg val limiters: PermissionLimiter = arrayOf(),
+		vararg val limiters: Limiter = arrayOf(),
 		val description: String = ""
 )
 
-class PermissionLimiter(
+open class Limiter(
 		val check: PermissionChecker,
 		val onFail: CommandFunction = {}
 )
