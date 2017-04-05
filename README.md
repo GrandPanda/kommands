@@ -1,7 +1,7 @@
 # kommands
 An easy-to-use Discord4J Command Library for Kotlin
 
-###Quick Start
+### Quick Start
 Here's a super simple snippet that shows the most basic setup required to get started. See below for more in-depth explanations.
 ```kotlin
 val client: IDiscordClient = ... // Obtained from Discord4J
@@ -15,7 +15,7 @@ val commands = CommandRegistry(mutableMapOf("hello" to helloCommand))
 client.dispatcher.registerListener(CommandListener(prefix = ".", commands))
 ```
 
-###Gradle
+### Gradle
 ```
 repositories {
     maven { url 'https://jitpack.io' }
@@ -26,7 +26,7 @@ dependencies {
 }
 ```
 
-###Further Explanation
+### Further Explanation
 In Kommands, a command is simply a function that determines what to do when the command is called and a series of "limiters" that determine under what circumstances the command can execute. The execution function is a receiver function for a `CommandContext` which contains information about the context in which a command was executed (like channel, author, etc).
 Here's an example echo command that simply repeats the first argument of the command back to the channel it was executed in:
 ```kotlin
