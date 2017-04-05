@@ -40,19 +40,16 @@ data class CommandContext(val client: IDiscordClient,
 }
 
 /**
- * Holds a function to be executed given that the limiters pass.
- * @param onCalled Function to be executed when the command is called.
- * @param limiters Limiters used to determine if the command should be executed.
+ * Holds a function [onCalled] to be executed given that the [limiters] pass.
  */
-class Command(
+open class Command(
 		val onCalled: CommandFunction,
 		vararg val limiters: Limiter = arrayOf()
 )
 
 /**
- * Used to limit the execution of a command depending on the result of the given [PermissionChecker].
- * @param check Function that checks if the command should be executed.
- * @param onFail Function that is executed if [check] returns false.
+ * Used to limit the execution of a command depending on the result of [check].
+ * If the result of [check] is false, [onFail] is executed.
  */
 open class Limiter(
 		val check: PermissionChecker,
